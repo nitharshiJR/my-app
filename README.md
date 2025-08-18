@@ -1,27 +1,191 @@
-# MyApp
+RxJs is a library in js. use to handle async data.
+RxJs use to appevents, Http reqs
+# Rxjs main
+   observable-special data structure
+   send multiple values over time not a same time
+   every time a new data update
+# why use RxJs in angular
+    handle async http reqs
+    manage click,scrolls
+    form changes track in reactive form
+    give communication methods for components
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.20.
+ # why use observable
+   *mutiple emitions(send)
+   *lazy execution- if your wish you can subscribe and start 
+   *cancelation-if you want you can stop data then resources can save.
 
-## Development server
+   # RxJs concepts
+   1. cold vs hot observable
+      cold observable - if we give subscription then it will start otherwise its cant start.
+      Hot observable -  automatically start to send data.even we dont give subscription to start
+   2. multicasting
+       ex: live tv everyone see same show
+   3. operators/functions
+        modify data stream (stream is data flow)
+           map - transform data
+           filter - filter data
+           merge - combine two streams
+   *without promisses we can using call back. but callback is look messy
+   *promise returns one value then stops.
+   *observable can return multiple values over time and can be cancelled.its used for http calls,user input events, timers, intervals
+ 
+ # Subscribing to observables
+ to consume data from an observable then need to subscribe.
+           observable.subscribe({
+              next: value => console.log(value),
+              error: err => console.error(err),
+              complete: () => console.log('Done!'),
+           });
+# unsubscribing
+always unsubscribe from observables to avaoid memory leaks.
+         const subscription = observable.subscribe(data => console.log(data));
+         subscription.unsubscribe();
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# map -> transforms data
+       import { of } from 'rxjs';
+   import { map } from 'rxjs/operators';
 
-## Code scaffolding
+   of(1, 2, 3)
+     .pipe(map((x) => x * 2))
+     .subscribe((value) => console.log(value));
+   // Output: 2, 4, 6
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# filter -> Filters values based on a condition.
+       import { filter } from 'rxjs/operators';
 
-## Build
+        of(1, 2, 3, 4, 5)
+            .pipe(filter((x) => x % 2 === 0))
+             .subscribe((value) => console.log(value));
+   // Output: 2, 4 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# take -> limits the number of emitted values
+          import { take } from 'rxjs/operators';
 
-## Running unit tests
+   of(1, 2, 3, 4, 5)
+     .pipe(take(3))
+     .subscribe((value) => console.log(value));
+   // Output: 1, 2, 3
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   # unsubscribe to avoid memory leaks
+      import { interval, Subscription } from 'rxjs';
 
-## Running end-to-end tests
+// interval(1000) → emits 0, 1, 2, 3... every 1 second
+const myObservable = interval(1000);
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+let subscription: Subscription = myObservable.subscribe((value) => {
+  console.log('Value emitted:', value);
+});
 
-## Further help
+// Unsubscribe after 3 seconds
+setTimeout(() => {
+  console.log('Unsubscribing now...');
+  subscription.unsubscribe();
+}, 3000);
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+ # use asyncpipe in templates
+ to avoid manual subscription, use the angular asyncpipe
+ <div *ngIf="data$ | async as data">
+  {{ data }}
+</div>
+
+# combine operators for complex logic
+chain multiple operators for complex transformations
+
+import { of } from 'rxjs';
+   import { map, filter } from 'rxjs/operators';
+
+   of(1, 2, 3, 4, 5)
+     .pipe(
+       filter((x) => x % 2 === 0),
+       map((x) => x * 10)
+     )
+     .subscribe((value) => console.log(value));
+   // Output: 20, 40
+
+# why use pipe'
+    modify data , filter unwanted values , apply logic  
+     
+     
+     import { of } from 'rxjs';
+      import { map, filter } from 'rxjs/operators';
+     const numbers$ = of(1, 2, 3, 4, 5);
+    numbers$
+    .pipe(
+    filter((n) => n % 2 === 0), // Only even numbers
+    map((n) => n * 10)         // Multiply by 10
+    )
+    .subscribe(console.log);
+# tap operator (import)
+ used to side effects. example debug,logging but doesnt change data flow
+
+   source$
+  .pipe(
+    tap((value) => console.log('Before processing:', value)),
+    map((value) => value * 2),
+    tap((value) => console.log('After processing:', value))
+  )
+  .subscribe();
+
+ # Error handelling 
+      if there errors in RxJs then entire pipeline will be stopped. so we put catch error & retry.
+
+   import { of, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+
+const source$ = throwError('Error occurred!');
+
+source$
+  .pipe(
+    retry(2), // 2 times retry 
+    catchError((err) => of('Fallback value')) // error fallback-a use 
+  )
+  .subscribe(console.log);
+
+  # practical 
+      import { from } from 'rxjs';
+      import { filter, map, tap } from 'rxjs/operators';
+
+const users$ = from([
+  { id: 1, name: 'Alice', age: 25 },
+  { id: 2, name: 'Bob', age: 30 },
+  { id: 3, name: 'Charlie', age: 35 }
+]);
+
+users$
+  .pipe(
+    filter((user) => user.age > 30), // Select users older than 30
+    map((user) => user.name),       // Extract usernames
+    tap((name) => console.log('Selected user:', name)) // Log usernames
+  )
+  .subscribe();  
+   
+   # fromEvent
+    using formEvent is help to handle input changes, button clicking and other Dom events in a reactive way.
+        import { fromEvent } from 'rxjs';
+         import { map, debounceTime } from 'rxjs/operators';
+
+// Reference the input element
+const searchInput = document.getElementById('search');
+
+// Create an observable for the input's 'input' event
+const searchObservable = fromEvent(searchInput, 'input')
+  .pipe(
+    map((event) => event.target.value), // Extract the input value
+    debounceTime(300)                  // Delay emissions for better performance
+  );
+
+// Subscribe to the observable
+searchObservable.subscribe((value) => {
+  console.log('Search query:', value);
+});
+# imperative vs declarative
+i-> step by step instructions, for loops&if conditions manual state update
+d-> describe desired outcome,RxJs operators,fromevent 
+    
+# changeDetection: ChangeDetectionStrategy.OnPush,
+ default mode- every few seconds you want to check the updates. if its there no updates
+ onpush mode - checks only when the update happen
+
+ # probably used interval just to test subscription working.
+ But for real PostService → backend data fetch, you don’t need interval.
