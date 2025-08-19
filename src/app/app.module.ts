@@ -9,6 +9,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { DeclpostComponent } from './declpost/declpost.component';
 import { FormsModule } from '@angular/forms';
+import { AltPagesComponent } from './alt-pages/alt-pages.component';
+import { SinglePostComponent } from './single-post/single-post.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     PostsComponent,
     HomeComponent,
-    DeclpostComponent   
+    DeclpostComponent,
+    AltPagesComponent,
+    SinglePostComponent   
   
     
   ],
