@@ -7,6 +7,8 @@ import { HeaderComponent } from './header/header.component';
 import { PostsComponent } from './posts/posts.component';
 import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { DeclpostComponent } from './declpost/declpost.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,12 +16,15 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     PostsComponent,
     HomeComponent,
+    DeclpostComponent   
+  
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot([]),
+    FormsModule,
   ],
   providers: [
     provideHttpClient() // Provide HttpClient for making HTTP requests

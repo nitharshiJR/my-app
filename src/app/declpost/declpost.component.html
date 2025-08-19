@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Posts</h2>
+
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <select class="form-select" [(ngModel)]="selectedCategory" (change)="onCategoryChange(selectedCategory)">
+          <option value="">Select Category</option>
+          <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <table class="table" *ngIf="filteredPosts.length">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Category Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of filteredPosts; let i = index" [id]="i">
+          <td>{{ post.id }}</td>
+          <td>{{ post.title }}</td>
+          <td>{{ post.description }}</td>
+          <td>{{ post.categoryTitle }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="!filteredPosts.length">No posts available.</div>
+  </div>
+</div>

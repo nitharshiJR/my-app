@@ -189,3 +189,19 @@ d-> describe desired outcome,RxJs operators,fromevent
 
  # probably used interval just to test subscription working.
  But for real PostService → backend data fetch, you don’t need interval.
+
+ # imperative style 
+ focus on how to do it, write explicit instructions, you manually control the data
+# declarative style
+focus on what the outcome should come on, like give a condition .
+ex: i want posts but only those where age >18
+
+# fork join
+It takes multiple Observables as input, runs them all in parallel, and emits the last emitted value of each Observable as an array once all of them complete.
+
+# combine latest
+combineLatest combines the latest emitted values from multiple Observables.
+
+It emits a new array/value every time any of the input Observables emits, but only after all Observables have emitted at least once.
+
+Unlike forkJoin, it does not wait for Observables to complete.

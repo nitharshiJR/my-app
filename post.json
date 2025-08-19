@@ -1,0 +1,36 @@
+{
+  "categories": {
+    "-C1aXyz123": { "id": "C1aXyz123", "name": "Technology" },
+    "-C1bYz456": { "id": "C1bYz456", "name": "Health" },
+    "-C1cZz789": { "id": "C1cZz789", "name": "Education" },
+    "-C1dAb012": { "id": "C1dAb012", "name": "Sports" },
+    "-C1eBc345": { "id": "C1eBc345", "name": "Business" }
+  },
+  "posts": {
+    "P1aXyz001": {
+      "title": "Intro to Angular",
+      "description": "Learn the basics of Angular framework.",
+      "categoryTitle": "Technology"
+    },
+    "P1bYz002": {
+      "title": "Healthy Eating",
+      "description": "Tips and tricks for a balanced diet.",
+      "categoryTitle": "Health"
+    },
+    "P1cZz003": {
+      "title": "E-learning Platforms",
+      "description": "Overview of top e-learning platforms.",
+      "categoryTitle": "Education"
+    },
+    "P1dAb004": {
+      "title": "Football News",
+      "description": "Latest football match updates and scores.",
+      "categoryTitle": "Sports"
+    },
+    "P1eBc005": {
+      "title": "Stock Market Basics",
+      "description": "Introduction to investing in the stock market.",
+      "categoryTitle": "Business"
+    }
+  }
+}

@@ -1,8 +1,7 @@
 export interface IPost {
-    id: string;
-    title: string;
-    name: string;
-    role: string;
-    age: number;
-    skills: string[];
+  id?: string;
+  title: string;
+  categoryId: string;
+  description: string;
+  categoryTitle?: string;
 }

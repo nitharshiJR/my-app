@@ -24,7 +24,7 @@ intervalSubscription!: Subscription;
   getPosts() {
     this.intervalSubscription=interval(1000).subscribe({
       next: (data) => {
-        console.log(data);
+        
     },
       error: (error) => {
         console.log(error);
@@ -35,10 +35,12 @@ intervalSubscription!: Subscription;
     
     });
 
-  this.postsSubscription = this.postService.getPosts()
+  this.postsSubscription = this.postService.getPostsWithCategory()
   .subscribe({
     next: (posts: any) => {
       this.posts = posts;
+      console.log(posts);
+      
     },
     error: (error) => {
       console.error('Error fetching posts:', error);
