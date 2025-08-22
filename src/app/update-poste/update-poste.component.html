@@ -1,0 +1,33 @@
+<div>
+    <form>
+        <div class ="my-2">
+            <label for="">Title</label>
+            <input type="text" class="form-control">
+        </div>
+
+        <div class ="my-2">
+            <label for="">Description</label>
+            <input type="text" class="form-control">
+        </div>
+
+        <div class ="my-2">
+            <label for="">Category</label>
+            <select class="form-select">
+                <option value="">select category</option>
+                <option value=""*ngFor="let category of categories$| async">
+                    {{category.categoryTitle}}
+                </option>
+            </select>
+        </div>
+
+        <div class ="my-2">
+            <label for="">Title</label>
+            <input type="text" class="form-control">
+        </div>
+
+        <div class="my-2">
+            <button type="submit" class="btn btn-warning">Update Post</button>
+        </div>
+
+    </form>
+</div>

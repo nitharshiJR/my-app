@@ -1,0 +1,29 @@
+<div>
+    <h3>ADD-POST</h3>
+    <div>
+    <form [formGroup]="postForm" >
+       <div class="my-2">
+        <label>Title</label>
+            <input type="text" class="form-control" formControlName="title"/> 
+        </div>
+     <div class="my-2">
+        <label>Description</label>
+            <input type="text" class="form-control"formControlName="description"/> 
+        </div>
+     <div class="my-2">
+        <select class="form-select" formControlName="categoryId">
+  <option value="">Select Category</option>
+  <option *ngFor="let category of categories$ | async" [value]="category.categoryId" [label]="category.categoryTitle">
+   {{ category.categoryTitle }}
+  </option>
+  
+</select>
+
+
+        </div>
+        <div class ="my-2">
+            <button (click)="onsubmit()"type="submit "class="btn btn-primary">ADD Post</button>
+            </div>
+    </form>
+</div>
+</div>

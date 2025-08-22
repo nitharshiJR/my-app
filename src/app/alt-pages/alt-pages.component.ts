@@ -9,20 +9,39 @@ import { IPost } from '../Ipost';
   styleUrls: ['./alt-pages.component.scss']
 })
 export class AltPagesComponent {
+  showAddPost = false;
 
-  posts$: Observable<IPost[]>;       // declare only
-  selectedPost$: Observable<IPost | null>; // declare only
+  // Observables
+  posts$: Observable<IPost[]>;
+  selectedPost$: Observable<IPost | null>;
+
+  // Model for new post
+  newPost: IPost = {
+    title: '',
+    categoryId: '',
+    description: ''
+  };
 
   constructor(private declarativeposts: DeclarativePostsService) {
-    this.posts$ = this.declarativeposts.postsWithCategory$; 
+    // Use allPost$ so newly added posts also appear
+    this.posts$ = this.declarativeposts.allPost$;
     this.selectedPost$ = this.declarativeposts.selectedPost$;
   }
 
+  // Select a post
   onSelectPost(post: IPost, event: Event) {
     event.preventDefault();
-    if (post.id) {                  // safe check for id
+    this.showAddPost = false;
+    if (post.id) {
       this.declarativeposts.selectPost(post.id);
     }
   }
-}
 
+  // Show Add Post form
+  onAddPost() {
+    this.showAddPost = true;
+  }
+
+  // Submit new post
+
+}

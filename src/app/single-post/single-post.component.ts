@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./single-post.component.scss']
 })
 export class SinglePostComponent implements OnInit {
+  showUpdatePost= false;
   errorMessage='';
   post$!: Observable<IPost | null>;
   
@@ -28,5 +29,9 @@ export class SinglePostComponent implements OnInit {
     map(posts => posts.find(p => p.id == postId) || null)
   );
 }
+
+ onUpdatePost(){
+  this.showUpdatePost = true;
+ }
 
 }

@@ -8,9 +8,12 @@ import { PostsComponent } from './posts/posts.component';
 import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { DeclpostComponent } from './declpost/declpost.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AltPagesComponent } from './alt-pages/alt-pages.component';
 import { SinglePostComponent } from './single-post/single-post.component';
+import { LoadingComponent } from './loading/loading.component';
+import { AddPostComponent } from './add-post/add-post.component';
+import { UpdatePosteComponent } from './update-poste/update-poste.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { SinglePostComponent } from './single-post/single-post.component';
     HomeComponent,
     DeclpostComponent,
     AltPagesComponent,
-    SinglePostComponent   
+    SinglePostComponent,
+    LoadingComponent,
+    AddPostComponent,
+    UpdatePosteComponent   
   
     
   ],
@@ -28,7 +34,8 @@ import { SinglePostComponent } from './single-post/single-post.component';
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot([]),
-    FormsModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     provideHttpClient() // Provide HttpClient for making HTTP requests

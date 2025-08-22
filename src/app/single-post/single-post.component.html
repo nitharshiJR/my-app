@@ -1,8 +1,13 @@
 <div *ngIf="post$ | async as post; ">
+
+  <button class="btn btn-warning"(click)="onUpdatePost()">Update Post</button>
+  <h3>Post Details</h3>
   <div>ID: {{ post.id }}</div>
   <div>Title: {{ post.title }}</div>
   <div>Description: {{ post.description }}</div>
   <div>Category: {{ post.categoryTitle}}</div>
+
+  <app-update-poste *ngIf="showUpdatePost"></app-update-poste>
 </div>
 
 
